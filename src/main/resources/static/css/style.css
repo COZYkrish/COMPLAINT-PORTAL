@@ -89,3 +89,34 @@ body {
         transform: translateY(0);
     }
 }
+.form-container {
+    width: 350px;
+    margin: 120px auto;
+    padding: 40px;
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    text-align: center;
+}
+
+.form-container input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 5px;
+}
+
+.form-container button {
+    width: 100%;
+    padding: 12px;
+    background: gold;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.form-container button:hover {
+    transform: scale(1.05);
+}
