@@ -56,5 +56,10 @@ public class AuthController {
         model.addAttribute("user", user);
         return "dashboard";
 }
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+        session.invalidate();
+        return "redirect:/login";
+    }
 
 }
