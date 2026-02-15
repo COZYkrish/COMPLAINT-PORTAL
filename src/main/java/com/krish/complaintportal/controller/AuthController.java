@@ -18,5 +18,28 @@ public class AuthController {
         return "login";
     }
 
-    
+    @PostMapping("/login")
+    public String loginUser(@RequestParam String email,
+                            @RequestParam String password,
+                            Model model) {
+
+        User user = userRepository.findByEmail(email);
+
+        if (user == null) {
+            model.addAttribute("error", "Email not registered!");
+            return "login";
+        }
+
+        if (!user.getPassword().equals(password)) {
+            model.addAttribute("error", "Invalid password!");
+            return "login";
+        }
+
+        return "redirect:/dashboard";
+    }
+
+    @GetMapping("/dashboard")
+    public String dashboard() {
+        return "dashboard";
+    }
 }
