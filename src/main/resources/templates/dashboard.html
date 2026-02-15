@@ -1,13 +1,15 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Dashboard</title>
 </head>
 <body>
 
-<h2>Welcome to Dashboard 🎉</h2>
+<h2 th:text="'Welcome, ' + ${user.email} + ' 🎉'"></h2>
 
-<a href="/login">Logout</a>
+<br>
+
+<a href="/logout">Logout</a>
 
 </body>
 </html>
