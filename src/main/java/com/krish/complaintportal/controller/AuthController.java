@@ -46,8 +46,15 @@ public class AuthController {
 
 
     @GetMapping("/dashboard")
-    public String dashboard() {
+    public String dashboard(Model model, HttpSession session) {
+
+        User user = (User) session.getAttribute("loggedInUser");
+
+        if (user == null) {
+            return "redirect:/login";
+        }
+        model.addAttribute("user", user);
         return "dashboard";
-    }
+}
 
 }
