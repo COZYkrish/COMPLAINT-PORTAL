@@ -5,9 +5,14 @@
 </head>
 <body>
 
-<h2 th:text="'Welcome, ' + ${user.email} + ' 🎉'"></h2>
+<h2>Dashboard Page</h2>
 
-<br>
+<p th:if="${user != null}" 
+   th:text="'Welcome, ' + ${user.email}"></p>
+
+<p th:if="${user == null}">
+   No user in session
+</p>
 
 <a href="/logout">Logout</a>
 
