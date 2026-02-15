@@ -19,20 +19,4 @@ public class HomeController {
     public String home() {
         return "index";
     }
-
-    @GetMapping("/register")
-    public String showRegisterForm() {
-        return "register";
-    }
-
-    @PostMapping("/register")
-    public String registerUser(@RequestParam String name,
-                               @RequestParam String email,
-                               @RequestParam String password) {
-
-        User user = new User(name, email, password);
-        userService.saveUser(user);
-
-        return "redirect:/";
-    }
 }
