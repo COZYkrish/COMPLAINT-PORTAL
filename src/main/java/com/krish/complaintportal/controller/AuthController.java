@@ -55,7 +55,7 @@ public class AuthController {
                             Model model,
                             HttpSession session) {
 
-        User user = userRepository.findByEmail(email);
+        User user = userRepository.findByEmail(email).orElse(null);
 
         if (user == null) {
             model.addAttribute("error", "Email not registered!");
