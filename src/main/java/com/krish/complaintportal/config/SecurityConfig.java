@@ -15,18 +15,41 @@ public class SecurityConfig {
     }
 
     @Bean
-public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
-    http
-        .csrf(csrf -> csrf.disable())
-        .headers(headers -> headers.frameOptions(frame -> frame.disable())) // 👈 allow frames for H2
-        .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/h2-console/**").permitAll()
-                .requestMatchers("/**").permitAll()
-        );
+        http
+            .csrf(csrf -> csrf.disable())
 
-    return http.build();
+            // Allow H2 Console Frames
+            .headers(headers -> headers.frameOptions(frame -> frame.disable()))
+
+            .authorizeHttpRequests(auth -> auth
+
+                // Public pages
+                .requestMatchers("/", "/register", "/login", "/css/**", "/h2-console/**").permitAll()
+
+                // USER access
+                .requestMatchers("/complaints/**").hasRole("USER")
+
+                // ADMIN access
+                .requestMatchers("/admin/**").hasRole("ADMIN")
+
+                // Everything else requires login
+                .anyRequest().authenticated()
+            )
+
+            .formLogin(form -> form
+                .loginPage("/login")
+                .defaultSuccessUrl("/dashboard", true)
+                .permitAll()
+            )
+
+            .logout(logout -> logout
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/login?logout")
+                .permitAll()
+            );
+
+        return http.build();
+    }
 }
-
-}
-
