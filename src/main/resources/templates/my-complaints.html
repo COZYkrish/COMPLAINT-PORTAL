@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>My Complaints</title>
+</head>
+<body>
+
+<h2>My Complaints</h2>
+
+<table border="1" th:if="${complaints != null and !complaints.isEmpty()}">
+    <tr>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Status</th>
+        <th>Created At</th>
+    </tr>
+
+    <tr th:each="complaint : ${complaints}">
+        <td th:text="${complaint.title}"></td>
+        <td th:text="${complaint.description}"></td>
+        <td th:text="${complaint.status}"></td>
+        <td th:text="${complaint.createdAt}"></td>
+    </tr>
+</table>
+
+<p th:if="${complaints == null or complaints.isEmpty()}">
+    No complaints submitted yet.
+</p>
+
+<br>
+<a href="/com
