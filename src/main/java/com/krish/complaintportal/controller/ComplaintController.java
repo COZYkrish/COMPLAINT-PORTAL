@@ -40,9 +40,19 @@ public class ComplaintController {
 
     @GetMapping("/my")
     public String myComplaints(Model model, Principal principal) {
-        User user = userRepository.findByEmail(principal.getName()).orElseThrow();
-        List<Complaint> complaints = complaintService.getUserComplaints(user);
-        model.addAttribute("complaints", complaints);
+
+        if (principal == null) {
+            return "redirect:/login";
+        }
+
+        User user = userRepository.findByEmail(principal.getName())
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        model.addAttribute("complaints", complaintService.getUserComplaints(user));
+
         return "my-complaints";
     }
-}
+
+
+    }
+

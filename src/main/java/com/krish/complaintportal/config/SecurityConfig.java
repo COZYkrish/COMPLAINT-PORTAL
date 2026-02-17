@@ -38,11 +38,12 @@ public class SecurityConfig {
             .headers(headers -> headers.frameOptions(frame -> frame.disable()))
 
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/", "/register", "/login", "/css/**", "/h2-console/**").permitAll()
-                .requestMatchers("/admin/**").hasRole("ADMIN")
-                .requestMatchers("/complaints/**").hasRole("USER")
-                .anyRequest().authenticated()
-            )
+        .requestMatchers("/", "/register", "/login", "/css/**", "/h2-console/**").permitAll()
+        .requestMatchers("/admin/**").hasRole("ADMIN")
+        .requestMatchers("/complaints/**").hasRole("USER")
+        .anyRequest().authenticated()
+)
+
 
             .formLogin(form -> form
                 .loginPage("/login")
