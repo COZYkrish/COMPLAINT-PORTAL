@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Dashboard</title>
+</head>
+<body>
+
+<h2>All Complaints</h2>
+
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>User</th>
+        <th>Title</th>
+        <th>Status</th>
+        <th>Action</th>
+    </tr>
+
+    <tr th:each="complaint : ${complaints}">
+        <td th:text="${complaint.id}"></td>
+        <td th:text="${complaint.user.email}"></td>
+        <td th:text="${complaint.title}"></td>
+        <td th:text="${complaint.status}"></td>
+        <td>
+            <a th:if="${complaint.status == 'PENDING'}"
+               th:href="@{/admin/resolve/{id}(id=${complaint.id})}">
+               Resolve
+            </a>
+        </td>
+    </tr>
+
+</table>
+
+</body>
+</html>

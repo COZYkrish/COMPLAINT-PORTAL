@@ -33,4 +33,10 @@ public class ComplaintService {
         complaint.setStatus(status);
         complaintRepository.save(complaint);
     }
+    public void resolveComplaint(Long id) {
+    Complaint complaint = complaintRepository.findById(id).orElseThrow();
+    complaint.setStatus("RESOLVED");
+    complaintRepository.save(complaint);
+}
+
 }
