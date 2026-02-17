@@ -39,13 +39,15 @@ public class SecurityConfig {
 
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/", "/register", "/login", "/css/**", "/h2-console/**").permitAll()
-                .requestMatchers("/complaints/**").hasRole("USER")
                 .requestMatchers("/admin/**").hasRole("ADMIN")
+                .requestMatchers("/complaints/**").hasRole("USER")
                 .anyRequest().authenticated()
             )
 
             .formLogin(form -> form
                 .loginPage("/login")
+                .usernameParameter("email")   // 🔥 IMPORTANT FIX
+                .passwordParameter("password")
                 .defaultSuccessUrl("/dashboard", true)
                 .permitAll()
             )
