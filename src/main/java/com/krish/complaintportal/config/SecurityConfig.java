@@ -36,14 +36,12 @@ public class SecurityConfig {
         http
             .csrf(csrf -> csrf.disable())
             .headers(headers -> headers.frameOptions(frame -> frame.disable()))
-
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/", "/register", "/login", "/css/**", "/h2-console/**").permitAll()
                 .requestMatchers("/admin/**").hasRole("ADMIN")
                 .requestMatchers("/complaints/**").hasRole("USER")
                 .anyRequest().authenticated()
             )
-
             .formLogin(form -> form
                 .loginPage("/login")
                 .usernameParameter("email")
