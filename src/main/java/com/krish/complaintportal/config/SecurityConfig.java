@@ -38,16 +38,15 @@ public class SecurityConfig {
             .headers(headers -> headers.frameOptions(frame -> frame.disable()))
 
             .authorizeHttpRequests(auth -> auth
-        .requestMatchers("/", "/register", "/login", "/css/**", "/h2-console/**").permitAll()
-        .requestMatchers("/admin/**").hasRole("ADMIN")
-        .requestMatchers("/complaints/**").hasRole("USER")
-        .anyRequest().authenticated()
-)
-
+                .requestMatchers("/", "/register", "/login", "/css/**", "/h2-console/**").permitAll()
+                .requestMatchers("/admin/**").hasRole("ADMIN")
+                .requestMatchers("/complaints/**").hasRole("USER")
+                .anyRequest().authenticated()
+            )
 
             .formLogin(form -> form
                 .loginPage("/login")
-                .usernameParameter("email")   // 🔥 IMPORTANT FIX
+                .usernameParameter("email")
                 .passwordParameter("password")
                 .defaultSuccessUrl("/dashboard", true)
                 .permitAll()
@@ -58,6 +57,8 @@ public class SecurityConfig {
                 .logoutSuccessUrl("/login?logout")
                 .permitAll()
             );
+
+        http.authenticationProvider(authenticationProvider()); // 🔥 IMPORTANT
 
         return http.build();
     }

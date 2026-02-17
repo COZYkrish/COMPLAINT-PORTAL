@@ -12,11 +12,14 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @Controller
 public class AuthController {
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
+    private final BCryptPasswordEncoder passwordEncoder;
 
-    @Autowired
-    private BCryptPasswordEncoder passwordEncoder;
+    public AuthController(UserRepository userRepository,
+                          BCryptPasswordEncoder passwordEncoder) {
+        this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
 
     @GetMapping("/register")
     public String registerPage() {
@@ -24,7 +27,8 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public String registerUser(@RequestParam String email,
+    public String registerUser(@RequestParam String name,
+                               @RequestParam String email,
                                @RequestParam String password,
                                Model model) {
 
@@ -32,18 +36,20 @@ public class AuthController {
             model.addAttribute("error", "Email already registered!");
             return "register";
         }
+
         User user = new User();
+        user.setName(name);
         user.setEmail(email);
         user.setPassword(passwordEncoder.encode(password));
-        user.setRole("ROLE_USER");
+        user.setRole("USER");   // ✅ store without ROLE_
 
         userRepository.save(user);
 
         return "redirect:/login";
     }
+
     @GetMapping("/login")
     public String loginPage() {
         return "login";
     }
-
 }
