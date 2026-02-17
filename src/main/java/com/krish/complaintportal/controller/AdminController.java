@@ -16,6 +16,7 @@ public class AdminController {
         this.complaintService = complaintService;
     }
 
+    
     @GetMapping("/dashboard")
     public String adminDashboard(Model model) {
         model.addAttribute("complaints", complaintService.getAllComplaints());
