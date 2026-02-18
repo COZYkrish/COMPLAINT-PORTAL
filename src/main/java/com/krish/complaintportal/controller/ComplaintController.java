@@ -1,3 +1,7 @@
+    @GetMapping("/my-complaints")
+    public String redirectMyComplaints() {
+        return "redirect:/complaints/my";
+    }
 package com.krish.complaintportal.controller;
 
 import org.springframework.stereotype.Controller;
