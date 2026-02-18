@@ -5,24 +5,31 @@
 </head>
 <body>
 
-<h2>Create Complaint</h2>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card p-4 mt-5 animate__animated animate__fadeIn">
+                <h2 class="mb-4 text-center">Create Complaint</h2>
+                <form th:action="@{/complaints/create}" th:object="${complaint}" method="post">
+                    <div class="mb-3">
+                        <label class="form-label">Title</label>
+                        <input type="text" th:field="*{title}" class="form-control" required />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Description</label>
+                        <textarea th:field="*{description}" class="form-control" rows="4" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-custom w-100">Submit Complaint</button>
+                </form>
+                <div class="text-center mt-3">
+                    <a href="/dashboard" class="btn btn-outline-light">Back to Dashboard</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-<form th:action="@{/complaints/create}" th:object="${complaint}" method="post">
-
-    <label>Title:</label>
-    <input type="text" th:field="*{title}" required />
-    <br><br>
-
-    <label>Description:</label>
-    <textarea th:field="*{description}" required></textarea>
-    <br><br>
-
-    <button type="submit">Submit Complaint</button>
-
-</form>
-
-<br>
-<a href="/dashboard">Back to Dashboard</a>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 
 </body>
 </html>

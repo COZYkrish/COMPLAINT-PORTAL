@@ -2,20 +2,131 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Dashboard</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" th:href="@{/css/style.css}">
+
 </head>
 <body>
 
-<h2>Dashboard Page</h2>
 
-<p th:if="${user != null}" 
-   th:text="'Welcome, ' + ${user.email}"></p>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+   <div class="container-fluid">
+      <a class="navbar-brand" href="#">ComplaintPortal</a>
+      <div class="d-flex">
+         <span class="navbar-text me-3" th:if="${user != null}" th:text="'Welcome, ' + ${user.email}"></span>
+         <a class="btn btn-custom" href="/logout">Logout</a>
+      </div>
+   </div>
+</nav>
 
-<p th:if="${user == null}">
-   No user in session
-</p>
+<div class="container">
+   <div class="row justify-content-center">
+      <div class="col-md-8">
+         <div class="card p-4 mb-4 animate__animated animate__fadeIn">
+            <h2 class="mb-3 text-center">Dashboard</h2>
+            <div th:if="${user == null}" class="alert alert-warning text-center mb-3">No user in session</div>
+            <div class="d-flex justify-content-center mb-4">
+               <a href="/complaints/create" class="btn btn-custom me-2">Create Complaint</a>
+               <a href="/my-complaints" class="btn btn-outline-light">My Complaints</a>
+            </div>
+            <div class="dashboard-stats d-flex justify-content-around mb-4">
+               <div class="stat-card text-center p-3 rounded shadow">
+                  <h4>Total Complaints</h4>
+                  <div class="display-6 fw-bold" th:text="${totalComplaints}">0</div>
+               </div>
+               <div class="stat-card text-center p-3 rounded shadow">
+                  <h4>Resolved</h4>
+                  <div class="display-6 fw-bold text-success" th:text="${resolvedComplaints}">0</div>
+               </div>
+               <div class="stat-card text-center p-3 rounded shadow">
+                  <h4>Pending</h4>
+                  <div class="display-6 fw-bold text-warning" th:text="${pendingComplaints}">0</div>
+               </div>
+            </div>
+                        <div class="text-center mb-4">
+                           <button class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#statsModal">
+                              View Detailed Stats
+                           </button>
+                        </div>
+                        <!-- Modal -->
+                        <div class="modal fade" id="statsModal" tabindex="-1" aria-labelledby="statsModalLabel" aria-hidden="true">
+                           <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content bg-dark text-light">
+                                 <div class="modal-header">
+                                    <h5 class="modal-title" id="statsModalLabel">Complaint Statistics</h5>
+                                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                                 </div>
+                                 <div class="modal-body">
+                                    <ul class="list-group list-group-flush">
+                                       <li class="list-group-item bg-dark text-light">Total Complaints: <span th:text="${totalComplaints}">0</span></li>
+                                       <li class="list-group-item bg-dark text-success">Resolved: <span th:text="${resolvedComplaints}">0</span></li>
+                                       <li class="list-group-item bg-dark text-warning">Pending: <span th:text="${pendingComplaints}">0</span></li>
+                                    </ul>
+                                 </div>
+                                 <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+            <!-- Floating Action Button -->
+            <button class="fab" onclick="window.location.href='/complaints/create'" title="File a new complaint">
+               <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+                  <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+               </svg>
+            </button>
+            <style>
+               .fab {
+                  position: fixed;
+                  bottom: 32px;
+                  right: 32px;
+                  width: 64px;
+                  height: 64px;
+                  border-radius: 50%;
+                  background: linear-gradient(135deg, #ffb347, #ffcc33);
+                  color: #232526;
+                  border: none;
+                  box-shadow: 0 4px 24px rgba(255,204,51,0.25);
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  font-size: 2rem;
+                  z-index: 1050;
+                  transition: transform 0.2s, box-shadow 0.2s;
+                  cursor: pointer;
+               }
+               .fab:hover {
+                  transform: scale(1.08) rotate(-8deg);
+                  box-shadow: 0 8px 32px rgba(255,204,51,0.35);
+               }
+            </style>
+            <div class="text-center">
+               <img src="/images/dashboard-illustration.svg" alt="Dashboard Illustration" style="max-width: 300px; width: 100%; filter: drop-shadow(0 0 10px #2a5298);">
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
 
-<a href="/logout">Logout</a>
+<!-- Suggestions for advanced user activities/features -->
+<!--
+1. Real-time notifications for complaint status updates (using WebSockets or polling)
+2. Interactive charts for complaint statistics (e.g., Chart.js)
+3. User profile customization (avatars, themes)
+4. Gamification: badges for users who resolve/submit complaints
+5. Admin chat support or FAQ chatbot
+6. Complaint timeline with status history
+7. Dark/light mode toggle
+8. File attachments for complaints
+9. Commenting system on complaints
+10. In-app guided tour for new users
+-->
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 
 </body>
 </html>

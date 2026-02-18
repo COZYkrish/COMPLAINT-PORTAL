@@ -1,49 +1,25 @@
+/* ===== GLOBAL ===== */
 body {
     margin: 0;
     font-family: 'Segoe UI', sans-serif;
     background: linear-gradient(135deg, #1e3c72, #2a5298);
     color: white;
+    min-height: 100vh;
 }
 
-/* Navbar */
+/* ===== NAVBAR (Bootstrap Compatible Override) ===== */
 .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 80px;
-    background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
+    background: rgba(0, 0, 0, 0.6) !important;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
 }
 
-.navbar ul {
-    display: flex;
-    gap: 30px;
-    list-style: none;
+.navbar-brand {
+    font-weight: bold;
+    letter-spacing: 1px;
 }
 
-.navbar a {
-    color: white;
-    text-decoration: none;
-    font-weight: 500;
-    position: relative;
-}
-
-.navbar a::after {
-    content: "";
-    position: absolute;
-    width: 0%;
-    height: 2px;
-    left: 0;
-    bottom: -5px;
-    background: gold;
-    transition: 0.3s;
-}
-
-.navbar a:hover::after {
-    width: 100%;
-}
-
-/* Hero */
+/* ===== HERO SECTION ===== */
 .hero {
     text-align: center;
     padding: 140px 20px;
@@ -60,25 +36,69 @@ body {
     opacity: 0.9;
 }
 
-.hero button {
-    margin-top: 30px;
-    padding: 15px 40px;
+/* ===== BUTTONS ===== */
+.btn-custom {
+    background: linear-gradient(90deg, #ffb347 0%, #ffcc33 100%);
     border: none;
-    border-radius: 5px;
-    background: gold;
-    font-size: 16px;
     font-weight: bold;
-    cursor: pointer;
+    color: #232526;
+    box-shadow: 0 2px 8px rgba(255,204,51,0.15);
     transition: 0.3s;
+    border-radius: 8px;
+}
+.btn-custom:hover {
+    transform: scale(1.08);
+    background: linear-gradient(90deg, #ffcc33 0%, #ffb347 100%);
+    color: #1e3c72;
+    box-shadow: 0 4px 16px rgba(255,204,51,0.25);
 }
 
-.hero button:hover {
-    transform: scale(1.1);
-    background: white;
-    color: #2a5298;
+/* ===== CARD DESIGN ===== */
+.card {
+    background: rgba(30, 60, 114, 0.25);
+    backdrop-filter: blur(16px) saturate(180%);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    color: #f3f6fb;
+    border: 1px solid rgba(255,255,255,0.18);
+    transition: box-shadow 0.3s, transform 0.3s;
+}
+.card:hover {
+    box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.47);
+    transform: translateY(-4px) scale(1.02);
 }
 
-/* Animation */
+/* ===== DASHBOARD STATS CARDS ===== */
+.dashboard-stats {
+    gap: 1.5rem;
+}
+.stat-card {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 18px;
+    box-shadow: 0 4px 24px rgba(42,82,152,0.15);
+    color: #f3f6fb;
+    min-width: 160px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+    backdrop-filter: blur(8px);
+}
+.stat-card:hover {
+    transform: scale(1.05) rotate(-1deg);
+    box-shadow: 0 8px 32px rgba(42,82,152,0.25);
+    background: rgba(42,82,152,0.18);
+}
+
+/* ===== ANIMATED ILLUSTRATION ===== */
+img[alt="Dashboard Illustration"] {
+    animation: floatY 3s ease-in-out infinite alternate;
+}
+@keyframes floatY {
+    from { transform: translateY(0); }
+    to { transform: translateY(-18px); }
+}
+
+/* ===== ANIMATION ===== */
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -88,35 +108,4 @@ body {
         opacity: 1;
         transform: translateY(0);
     }
-}
-.form-container {
-    width: 350px;
-    margin: 120px auto;
-    padding: 40px;
-    background: rgba(255,255,255,0.1);
-    backdrop-filter: blur(10px);
-    border-radius: 10px;
-    text-align: center;
-}
-
-.form-container input {
-    width: 100%;
-    padding: 12px;
-    margin: 10px 0;
-    border: none;
-    border-radius: 5px;
-}
-
-.form-container button {
-    width: 100%;
-    padding: 12px;
-    background: gold;
-    border: none;
-    cursor: pointer;
-    font-weight: bold;
-    transition: 0.3s;
-}
-
-.form-container button:hover {
-    transform: scale(1.05);
 }
