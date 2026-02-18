@@ -19,4 +19,9 @@ public class HomeController {
     public String home() {
         return "index";
     }
+
+    @GetMapping("/my-complaints")
+    public String redirectMyComplaints() {
+        return "redirect:/complaints/my";
+    }
 }

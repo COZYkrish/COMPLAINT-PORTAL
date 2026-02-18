@@ -45,9 +45,9 @@
                                     <span th:text="${complaint.status}" th:classappend="${complaint.status == 'PENDING'} ? 'text-warning fw-bold' : 'text-success fw-bold'"></span>
                                 </td>
                                 <td>
-                                    <a th:if="${complaint.status == 'PENDING'}"
-                                         th:href="@{/admin/resolve/{id}(id=${complaint.id})}"
-                                         class="btn btn-sm btn-outline-success">Resolve</a>
+                                    <form th:if="${complaint.status == 'PENDING'}" th:action="@{/admin/resolve/{id}(id=${complaint.id})}" method="post" style="display:inline;">
+                                        <button type="submit" class="btn btn-sm btn-outline-success">Resolve</button>
+                                    </form>
                                 </td>
                             </tr>
                         </tbody>
