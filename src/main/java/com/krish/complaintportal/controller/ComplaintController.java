@@ -26,11 +26,11 @@ public class ComplaintController {
         return "redirect:/complaints/my";
     }
 
-    // @GetMapping("/create")
-    // public String showForm(Model model) {
-    //     model.addAttribute("complaint", new Complaint());
-    //     return "create-complaint";
-    // }
+    @GetMapping("/create")
+    public String showForm(Model model) {
+        model.addAttribute("complaint", new Complaint());
+        return "create-complaint";
+    }
     @PostMapping("/create")
     public String createComplaint(@ModelAttribute Complaint complaint, Principal principal) {
         User user = userRepository.findByEmail(principal.getName()).orElseThrow();
