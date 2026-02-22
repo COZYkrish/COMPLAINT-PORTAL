@@ -31,13 +31,13 @@ public class ComplaintController {
         model.addAttribute("complaint", new Complaint());
         return "create-complaint";
     }
-    // @PostMapping("/create")
-    // public String createComplaint(@ModelAttribute Complaint complaint, Principal principal) {
-    //     User user = userRepository.findByEmail(principal.getName()).orElseThrow();
-    //     complaint.setUser(user);
-    //     complaintService.saveComplaint(complaint);
-    //     return "redirect:/complaints/my";
-    // }
+    @PostMapping("/create")
+    public String createComplaint(@ModelAttribute Complaint complaint, Principal principal) {
+        User user = userRepository.findByEmail(principal.getName()).orElseThrow();
+        complaint.setUser(user);
+        complaintService.saveComplaint(complaint);
+        return "redirect:/complaints/my";
+    }
     @GetMapping("/my")
     public String myComplaints(Model model, Principal principal) {
         if (principal == null) {
