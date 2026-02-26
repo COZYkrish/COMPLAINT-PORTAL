@@ -24,13 +24,13 @@ public class DashboardController {
         this.complaintService = complaintService;
     }
 
-    // @GetMapping("/dashboard")
-    // public String dashboard(Model model, Principal principal) {
-    //     if (principal == null) {
-    //         return "redirect:/login";
-    //     }
-    //     User user = userRepository.findByEmail(principal.getName()).orElse(null);
-    //     model.addAttribute("user", user);
+    @GetMapping("/dashboard")
+    public String dashboard(Model model, Principal principal) {
+        if (principal == null) {
+            return "redirect:/login";
+        }
+        User user = userRepository.findByEmail(principal.getName()).orElse(null);
+        model.addAttribute("user", user);
 
         // User's complaints
         List<Complaint> complaints = complaintService.getUserComplaints(user);
