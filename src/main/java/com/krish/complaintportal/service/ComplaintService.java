@@ -16,16 +16,16 @@ public class ComplaintService {
         this.complaintRepository = complaintRepository;
     }
 
-    // public Complaint saveComplaint(Complaint complaint) {
-    //     return complaintRepository.save(complaint);
-    // }
+    public Complaint saveComplaint(Complaint complaint) {
+        return complaintRepository.save(complaint);
+    }
 
-    // public List<Complaint> getUserComplaints(User user) {
-    //     return complaintRepository.findByUser(user);
-    // }
+    public List<Complaint> getUserComplaints(User user) {
+        return complaintRepository.findByUser(user);
+    }
 
-    // public List<Complaint> getAllComplaints() {
-    //     return complaintRepository.findAll();
+    public List<Complaint> getAllComplaints() {
+        return complaintRepository.findAll();
     }
 
     public void updateStatus(Long id, String status) {
