@@ -32,10 +32,10 @@ public class AuthController {
                                @RequestParam String password,
                                Model model) {
 
-    //     if (userRepository.findByEmail(email).isPresent()) {
-    //         model.addAttribute("error", "Email already registered!");
-    //         return "register";
-    //     }
+        if (userRepository.findByEmail(email).isPresent()) {
+            model.addAttribute("error", "Email already registered!");
+            return "register";
+        }
 
         User user = new User();
         user.setName(name);
