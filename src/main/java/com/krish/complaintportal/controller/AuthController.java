@@ -17,9 +17,9 @@ public class AuthController {
 
     // public AuthController(UserRepository userRepository,
     //                       BCryptPasswordEncoder passwordEncoder) {
-    //     this.userRepository = userRepository;
-    //     this.passwordEncoder = passwordEncoder;
-    // }
+        this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
 
     @GetMapping("/register")
     public String registerPage() {
