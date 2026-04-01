@@ -26,11 +26,11 @@ public class AuthController {
     //     return "register";
     // }
 
-    // @PostMapping("/register")
-    // public String registerUser(@RequestParam String name,
-    //                            @RequestParam String email,
-    //                            @RequestParam String password,
-    //                            Model model) {
+    @PostMapping("/register")
+    public String registerUser(@RequestParam String name,
+                               @RequestParam String email,
+                               @RequestParam String password,
+                               Model model) {
 
     //     if (userRepository.findByEmail(email).isPresent()) {
     //         model.addAttribute("error", "Email already registered!");
