@@ -21,21 +21,21 @@ public class AuthController {
         this.passwordEncoder = passwordEncoder;
     }
 
-    @GetMapping("/register")
-    public String registerPage() {
-        return "register";
-    }
+    // @GetMapping("/register")
+    // public String registerPage() {
+    //     return "register";
+    // }
 
-    @PostMapping("/register")
-    public String registerUser(@RequestParam String name,
-                               @RequestParam String email,
-                               @RequestParam String password,
-                               Model model) {
+    // @PostMapping("/register")
+    // public String registerUser(@RequestParam String name,
+    //                            @RequestParam String email,
+    //                            @RequestParam String password,
+    //                            Model model) {
 
-        if (userRepository.findByEmail(email).isPresent()) {
-            model.addAttribute("error", "Email already registered!");
-            return "register";
-        }
+    //     if (userRepository.findByEmail(email).isPresent()) {
+    //         model.addAttribute("error", "Email already registered!");
+    //         return "register";
+    //     }
 
         User user = new User();
         user.setName(name);
