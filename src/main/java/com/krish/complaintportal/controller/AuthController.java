@@ -37,11 +37,11 @@ public class AuthController {
             return "register";
         }
 
-        // User user = new User();
-        // user.setName(name);
-        // user.setEmail(email);
-        // user.setPassword(passwordEncoder.encode(password));
-        // user.setRole("USER");   // ✅ store without ROLE_
+        User user = new User();
+        user.setName(name);
+        user.setEmail(email);
+        user.setPassword(passwordEncoder.encode(password));
+        user.setRole("USER");   // ✅ store without ROLE_
 
         userRepository.save(user);
 
