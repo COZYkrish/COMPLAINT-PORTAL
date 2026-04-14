@@ -15,10 +15,10 @@ public class AuthController {
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder passwordEncoder;
 
-    // public AuthController(UserRepository userRepository,
-    //                       BCryptPasswordEncoder passwordEncoder) {
-    //     this.userRepository = userRepository;
-    //     this.passwordEncoder = passwordEncoder;
+    public AuthController(UserRepository userRepository,
+                          BCryptPasswordEncoder passwordEncoder) {
+        this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @GetMapping("/register")
