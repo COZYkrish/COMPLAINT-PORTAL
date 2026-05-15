@@ -21,15 +21,15 @@ public class AuthController {
         this.passwordEncoder = passwordEncoder;
     }
 
-    @GetMapping("/register")
-    public String registerPage() {
-        return "register";
-    }
+    // @GetMapping("/register")
+    // public String registerPage() {
+    //     return "register";
+    // }
 
-    // @PostMapping("/register")
-    // public String registerUser(@RequestParam String name,
-    //                            @RequestParam String email,
-    //                            @RequestParam String password,
+    @PostMapping("/register")
+    public String registerUser(@RequestParam String name,
+                               @RequestParam String email,
+                               @RequestParam String password,
                                Model model) {
 
         if (userRepository.findByEmail(email).isPresent()) {
